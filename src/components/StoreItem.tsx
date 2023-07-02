@@ -1,3 +1,4 @@
+import { useShoppingCart } from "../context/ShopingCarContext";
 import { formatCurrency } from "../utilites/formatCurency";
 
 type StoreItemProps = {
@@ -8,7 +9,13 @@ type StoreItemProps = {
 };
 
 export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
-  const quntity = 0;
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
+  const quntity = getItemQuantity(id);
   return (
     <div>
       <img src={imgUrl} alt="image" width="300" height="300" />
@@ -20,17 +27,19 @@ export default function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
       </div>
       <div>
         {quntity === 0 ? (
-          <button>+ add to cart</button>
+          <button onClick={() => increaseCartQuantity(id)}>
+            + add to cart
+          </button>
         ) : (
           <div>
             <div>
-              <button>plus</button>
+              <button onClick={() => increaseCartQuantity(id)}>plus</button>
               <div>
                 <span>{quntity}</span>
               </div>
-              <button>minus</button>
+              <button onClick={() => decreaseCartQuantity(id)}>minus</button>
               <div>
-                <button>remove</button>
+                <button onClick={() => removeFromCart(id)}>remove</button>
               </div>
             </div>
           </div>

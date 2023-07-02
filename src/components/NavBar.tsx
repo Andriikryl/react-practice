@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useShoppingCart } from "../context/ShopingCarContext";
 
 export default function NavBar() {
+  const { openCart, cartQuantity } = useShoppingCart();
   return (
     <div className="container">
       <div>nav</div>
@@ -15,9 +17,11 @@ export default function NavBar() {
           <Link to="/store">Store</Link>
         </li>
       </ul>
-      <button>
-        Cart <div>3 </div>
-      </button>
+      {cartQuantity > 0 && (
+        <button onClick={openCart}>
+          Cart <div>{cartQuantity} </div>
+        </button>
+      )}
     </div>
   );
 }
