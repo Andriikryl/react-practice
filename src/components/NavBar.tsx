@@ -16,7 +16,7 @@ export default function NavBar() {
         </li>
       </ul>
       <button>
-        Cart <div>3</div>
+        Cart <div>3 </div>
       </button>
     </div>
   );
